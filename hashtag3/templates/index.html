@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}GetLight{% endblock %}
+{% block main %}
+    <div class="jumbotron">
+        <h1 class="display-4">Привет!</h1>
+        <p class="lead">Наше приложение помогает г. Ульяновску в устранении проблем освещенности улиц.<br>Разработано Team.py для УльГЭС.</p>
+        <hr class="my-4">
+        <p>GetLight - помоги городу стать светлее</p>
+    </div>
+    <h3>Что такое GetLight?</h3>
+    <p>GetLight - веб приложение для проверки освещенности улиц. Заметили <b>не работающий фонарь</b>, и городские службы не знают об этом? Отправьте фотографию прямо в <b>УльГЭС</b> через
+    наше приложение и проблема исчезнет!</p>
+    <h3>Как использовать приложение?</h3>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">На машине</h5>
+                    <p class="card-text">Установите и закрепите телефон вертикально на лобовое стекло. Нажмите кнопку "Начать". Чтобы прекратить использование приложения, нажмите кнопку "Стоп"
+                    </p>
+                    <div class="arrow-7">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <div class="text-center">
+                        <a class="btn btn-primary" href='{% url 'GetLight:car' %}' role="button">Начать трекинг</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Пешком</h5>
+                    <p class="card-text">Держите телефон вертикально, чтобы была видна дорога и осветительный прибор. Нажмите кнопку "Начать". Чтобы отправить фотографию, нажмите кнопку "Отправить"
+                    </p>
+                    <div class="arrow-7">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <div class="text-center">
+                        <a class="btn btn-primary" href='{% url "GetLight:phone" %}' role="button">Загрузить фотографию</a>
+                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <img src='{% static "img/tel.png" %}' class="col-md-4">
+{% endblock %}

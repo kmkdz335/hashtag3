@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}GetLight - пешком{% endblock %}
+{% block main %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input type="submit" value="Отправить" class="btn btn-outline-primary" id="send-my-url-to-django-button"/>
+    </form>
+    <script type="text/javascript">
+    let q;
+      navigator.geolocation.getCurrentPosition(success, error, {
+  // высокая точность
+  enableHighAccuracy: true
+})
+
+function success({ coords }) {
+  // получаем широту и долготу
+  const { latitude, longitude } = coords
+  q = [latitude, longitude]
+    document.getElementById('id_geolok').value= q
+  console.log(q) // [широта, долгота]
+}
+
+function error({ message }) {
+  console.log(message) // при отказе в доступе получаем PositionError: User denied Geolocation
+}
+
+    </script>
+{% endblock %}

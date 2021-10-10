@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}GetLight - в движении{% endblock %}
+{% block main %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form|crispy }}
+    </form>
+    <script type="text/javascript">
+    let q;
+      navigator.geolocation.getCurrentPosition(success, error, {
+  // высокая точность
+  enableHighAccuracy: true
+})
+
+function success({ coords }) {
+  // получаем широту и долготу
+  const { latitude, longitude } = coords
+  q = [latitude, longitude]
+    document.getElementById('id_geolok').value= q
+  console.log(q) // [широта, долгота]
+}
+
+function error({ message }) {
+  console.log(message) // при отказе в доступе получаем PositionError: User denied Geolocation
+}
+
+    </script>
+    <video id="video"  width="640" height="480" autoplay>Video work</video>
+    <script>
+    const video = document.getElementById('video');
+    function startup(){
+        navigator.mediaDevices.getUserMedia({
+        audio: false,
+        video:true
+        }).then(stream => {
+        video.srcObject = stream;
+        }).catch(console.error)
+    }
+    window.addEventListener('load',startup,false);
+    </script>
+    <button class="btn btn-primary" type="submit" id="snap">Старт</button>
+    <canvas id="canvas" width="640" height="480"></canvas>
+    <script type="text/javascript">
+    let scam;
+    var canvas = document.getElementById('canvas');
+    var context = canvas.getContext('2d');
+    var intervalId = 0;
+    // Триггер для захвата фото
+    document.getElementById("snap").addEventListener("click", function() {
+        if(intervalId > 0) {
+            clearInterval(intervalId);
+            intervalId = 0;
+        } else {
+            intervalId = setInterval(start, 3000);
+        }
+    });
+    function start() {
+        context.drawImage(video, 0, 0, 640, 480);
+
+        flag = 0;
+    }
+    </script>
+{% endblock %}
