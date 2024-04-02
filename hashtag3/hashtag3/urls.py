@@ -21,6 +21,6 @@ from django.conf.urls.static import static
 from hashtag3 import settings
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin1/', admin.site.urls),
     path('', include('getlight.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
